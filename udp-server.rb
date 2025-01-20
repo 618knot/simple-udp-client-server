@@ -16,6 +16,7 @@ Socket.udp_server_sockets("0.0.0.0", 4096) do |sockets|
     logger.debug(m)
     if m.last == 255
       logger.debug("TIME: #{Time.now - start}")
+      return
     end
   end
 end
