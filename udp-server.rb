@@ -20,7 +20,7 @@ Socket.udp_server_sockets("0.0.0.0", 4096) do |sockets|
     end
     
     p m
-    logger.debug(m) if !start_flg
+    logger.debug(m) if start_flg
     if start_flg && m.last == 255
       logger.debug("TIME: #{Time.now - start}")
       return
