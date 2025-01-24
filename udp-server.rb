@@ -11,15 +11,17 @@ start_flg = false
 
 Socket.udp_server_sockets("0.0.0.0", 4096) do |sockets|
   Socket.udp_server_loop_on(sockets) do |msg, _|
-    unless start_flg
+    m = msg.bytes
+
+    if !start_flg && m.last == 0
       start = Time.now
       start_flg = true
     end
 
-    m = msg.bytes
+    
     p m
     logger.debug(m)
-    if m.last == 255
+    if start_flg && m.last == 255
       logger.debug("TIME: #{Time.now - start}")
       return
     end
