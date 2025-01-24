@@ -8,7 +8,7 @@ logger = Logger.new("../btrlog/#{logname}.log")
 puts "Created Log: ../btrlog/#{logname}.log"
 puts "UDP Server is Running...\n"
 start_flg = false
-strat = nil
+start = nil
 
 Socket.udp_server_sockets("0.0.0.0", 4096) do |sockets|
   Socket.udp_server_loop_on(sockets) do |msg, _|
@@ -18,9 +18,10 @@ Socket.udp_server_sockets("0.0.0.0", 4096) do |sockets|
       start = Time.now
       start_flg = true
     end
+    p start
 
     
-    p m
+    # p m
     logger.debug(m)
     if start_flg && m.last == 255
       logger.debug("TIME: #{Time.now - start}")
